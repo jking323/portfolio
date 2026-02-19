@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="author" content="{{ .Site.Params.author }}">
+<link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ "feed.xml" | absURL }}">
+<style>
+/* ================================================================
+   jeremyking.co — a small web site
+   No frameworks. No JavaScript. No build step beyond Hugo.
+   ================================================================ */
+
+body {
+  background: #faf8f5;
+  color: #2c2416;
+  font-family: Georgia, "Bitstream Charter", "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.65;
+  word-spacing: 0.05em;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.site {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 3em 1.5em 4em;
+}
+
+/* --- Header --- */
+header {
+  margin-bottom: 3em;
+  padding-bottom: 1.5em;
+  border-bottom: 1px solid #d8d0c4;
+}
+
+header h1 {
+  font-size: 1.1em;
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.2em;
+  color: #8a7e6e;
+  margin: 0 0 0.3em;
+}
+
+header h1 a {
+  color: #8a7e6e;
+  border: none;
+}
+
+header h1 a:hover {
+  color: #c06020;
+}
+
+header p.tagline {
+  margin: 0;
+  font-size: 0.92em;
+  color: #6b5f4f;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+nav {
+  margin-top: 1em;
+  font-size: 0.85em;
+}
+
+nav a {
+  margin-right: 1.2em;
+  color: #6b5f4f;
+}
+
+nav a:hover {
+  color: #c06020;
+}
+
+/* --- Links --- */
+a {
+  color: #b85a1a;
+  text-decoration: none;
+  border-bottom: 1px dotted #c9a882;
+}
+
+a:visited {
+  color: #a0522d;
+}
+
+a:hover {
+  border-bottom: 1px solid #c06020;
+  color: #c06020;
+}
+
+/* --- Headings --- */
+h2 {
+  font-size: 1em;
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: #8a7e6e;
+  margin: 2.5em 0 0.6em;
+  padding-bottom: 0.2em;
+  border-bottom: 1px solid #e8e2d8;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: normal;
+  font-style: italic;
+  margin: 1.8em 0 0.4em;
+  color: #4a3f30;
+}
+
+/* --- Content page title --- */
+.page-title {
+  font-size: 1.6em;
+  font-weight: normal;
+  letter-spacing: 0.02em;
+  margin: 0 0 0.2em;
+  color: #2c2416;
+}
+
+.page-meta {
+  font-size: 0.85em;
+  color: #a89880;
+  font-style: italic;
+  margin-bottom: 2em;
+}
+
+/* --- Lists --- */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 0.7em;
+  padding-left: 0;
+}
+
+li a {
+  border-bottom-color: transparent;
+}
+
+li a:hover {
+  border-bottom: 1px dotted #c06020;
+}
+
+/* --- Entry list --- */
+.entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1em;
+}
+
+.entry a {
+  flex: 1;
+}
+
+.entry time {
+  font-size: 0.8em;
+  color: #a89880;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.tag {
+  font-size: 0.72em;
+  color: #a89880;
+  font-style: italic;
+  margin-left: 0.4em;
+}
+
+/* --- Prose (article content) --- */
+.prose p {
+  margin: 1.2em 0;
+}
+
+.prose ul {
+  list-style: disc;
+  padding-left: 1.2em;
+}
+
+.prose li {
+  margin-bottom: 0.4em;
+}
+
+.prose li a {
+  border-bottom: 1px dotted #c9a882;
+}
+
+.prose blockquote {
+  font-size: 0.92em;
+  margin: 1.8em 0;
+  padding: 0 1.5em;
+  border-left: 1px dotted #8a7e6e;
+  color: #4a3f30;
+}
+
+.prose pre {
+  background: #f0ebe4;
+  padding: 0.8em 1em;
+  overflow-x: auto;
+  font-size: 0.88em;
+  border-radius: 2px;
+}
+
+.prose code {
+  font-size: 0.9em;
+  background: #f0ebe4;
+  padding: 0.1em 0.3em;
+  border-radius: 2px;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose img {
+  max-width: 100%;
+  margin: 1.5em 0;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid #e8e2d8;
+  margin: 2.5em 0;
+}
+
+/* --- Footer --- */
+footer {
+  margin-top: 4em;
+  padding-top: 1.5em;
+  border-top: 1px solid #d8d0c4;
+  font-size: 0.8em;
+  color: #a89880;
+}
+
+footer a {
+  color: #8a7e6e;
+  border-bottom-color: #d8d0c4;
+}
+
+footer a:hover {
+  color: #c06020;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .site { padding: 2em 1.2em 3em; }
+  header { margin-bottom: 2em; }
+  .entry { flex-direction: column; gap: 0; }
+  .entry time { margin-top: -0.3em; margin-bottom: 0.5em; }
+}
+
+@media print {
+  body { background: white; color: black; font-size: 12pt; }
+  a { color: black; border: none; }
+  .site { max-width: none; padding: 0; }
+  nav, footer { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="site">
+
+{{ partial "header.html" . }}
+
+<main>
+  {{ block "main" . }}{{ end }}
+</main>
+
+{{ partial "footer.html" . }}
+
+</div>
+</body>
+</html>

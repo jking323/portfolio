@@ -1,0 +1,21 @@
+{{ define "main" }}
+
+<h1 class="page-title">{{ .Title }}</h1>
+
+{{ with .Content }}
+<div class="prose">
+  {{ . }}
+</div>
+{{ end }}
+
+<ul>
+  {{ range .Pages.ByDate.Reverse }}
+  <li class="entry">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Params.status }}<span class="tag">{{ . }}</span>{{ end }}
+    {{ if not .Date.IsZero }}<time>{{ .Date.Format "Jan 2006" }}</time>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+
+{{ end }}

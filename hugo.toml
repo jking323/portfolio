@@ -1,0 +1,30 @@
+baseURL = "https://jeremyking.co"
+languageCode = "en-us"
+title = "Jeremy King"
+
+# No theme — we roll our own
+# No taxonomies — keep it simple
+# No pagination — everything on one page per section
+
+[params]
+  description = "Electrical engineer, cigar shop owner, small web enthusiast."
+  author = "Jeremy King"
+  email = "jeremy@jeremyking.co"
+  github = "jking323"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "friendly"
+    noClasses = false
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss+xml"
+    baseName = "feed"

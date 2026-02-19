@@ -1,0 +1,47 @@
+{{ define "main" }}
+
+<div class="about">
+  {{ .Content }}
+</div>
+
+<h2>projects</h2>
+<ul>
+  {{ range (where .Site.RegularPages "Section" "projects").ByWeight }}
+  <li class="entry">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Params.status }}<span class="tag">{{ . }}</span>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+
+<h2>writing</h2>
+<ul>
+  {{ range (where .Site.RegularPages "Section" "writing").ByDate.Reverse }}
+  <li class="entry">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    <time>{{ .Date.Format "Jan 2006" }}</time>
+  </li>
+  {{ end }}
+</ul>
+
+<h2>workshop</h2>
+<ul>
+  {{ range (where .Site.RegularPages "Section" "workshop").ByWeight }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Params.note }}<span class="tag">— {{ . }}</span>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+
+<h2>links</h2>
+<ul>
+  {{ range (where .Site.RegularPages "Section" "links").ByWeight }}
+  <li>
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Params.note }}<span class="tag">— {{ . }}</span>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+
+{{ end }}
