@@ -1,9 +1,12 @@
 ---
-title: "Discrete Audio Player"
+title: "Digital Audio Player"
 status: "growing"
-weight: 4
+weight: 3
 ---
 
-A portable digital audio player built with discrete components. No off-the-shelf DAC chips — the digital-to-analog conversion is built from individual resistors and op-amps.
+This is my most ambitious project, building a high quality DAP with the cleanest analog chain i can get! AKM provides their flagship dac shipset and it will be set in dual mono. I'm using an STM32H7 for the brain and it'll run on three 18650 cells. My current power target won't be the stinkiest out put, 500mW on the balanced out, but the goal is the cleanest possible signal chain.
 
-The point is to hear what happens when you control every stage of the signal path.
+I call it the Dingus! Big ups to dankpods for inspiring me to go down this path and encouraging the anti snobbery side of audio!
+
+Links:
+ - [Repo](github.com/jking323/dingus)

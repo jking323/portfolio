@@ -14,7 +14,7 @@ I stood most of this up from a hotel in Italy over two days. The server doesn't 
 
 **Documents:** Paperless-ngx, BookStack wiki, Wallabag read-later, Linkwarden bookmarks
 
-**Media:** Plex + Plexamp, Lidarr, Prowlarr, SABnzbd, qBittorrent
+**Media:** Jellyfin + Finamp, Sonarr, Radarr, Lidarr, Prowlarr, SABnzbd, qBittorrent
 
 **Photos:** Immich
 

@@ -8,9 +8,7 @@ A running list of the tools I reach for most often, both physical and digital.
 ## Physical
 
 - Nikon Z7II — photography
-- Weller soldering station
-- Rigol oscilloscope
-- Brother P-touch label maker — everything gets a label
+- Metcal - Soldering Station(Amazing and a really cool application of material science for temp control)
 
 ## Digital
 
