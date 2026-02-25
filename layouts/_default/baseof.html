@@ -266,6 +266,56 @@ footer a:hover {
   .site { max-width: none; padding: 0; }
   nav, footer { display: none; }
 }
+
+.newsletter-input-minimal {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #d8d0c4; /* Your muted border color */
+    padding: 5px 0;                   /* Aligns it with the text line */
+    color: #2c2416;                   /* Your main text color */
+    font-family: inherit;             /* Keeps Georgia/Times */
+    font-size: 0.95em;
+    width: 200px;
+    margin-right: 10px;
+    transition: border-color 0.2s;
+}
+
+.newsletter-input-minimal:focus {
+    outline: none;
+    border-bottom: 1px solid #c06020; /* Your accent color on click */
+}
+
+/* Styling the "Email Address" placeholder text */
+.newsletter-input-minimal::placeholder {
+    color: #a89880;                   /* Your muted/italic meta color */
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.newsletter-submit-link {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    /* This is the magic: inherit all 'a' properties */
+    color: #b85a1a;
+    font-family: inherit;
+    font-size: inherit;
+    border-bottom: 1px dotted #c9a882;
+}
+
+.newsletter-submit-link:hover {
+    color: #c06020;
+    border-bottom: 1px solid #c06020;
+}
+
+.usenet-post code {
+    display: block;
+    color: #4a3f30;
+    line-height: 1.4;
+}
+
 </style>
 </head>
 <body>
