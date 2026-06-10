@@ -1,0 +1,21 @@
+{{- /*
+  figure — a single captioned, build-time-optimized photo.
+
+  Usage:
+    {{< figure src="donor-jeep.jpg" caption="The donor, day one" >}}
+    {{< figure src="hero.jpg" alt="..." class="lead-photo" >}}
+
+  src resolves against the page bundle first, then assets/. Output is WebP,
+  resized + capped, with a srcset for phones. Drop the photo next to the
+  page's index.md.
+*/ -}}
+{{- $class := .Get "class" -}}
+{{- $caption := .Get "caption" -}}
+{{- $alt := or (.Get "alt") $caption -}}
+{{- $lead := eq $class "lead-photo" -}}
+{{- $maxw := cond $lead 1472 1280 -}}
+{{- $sizes := cond $lead "(min-width: 720px) 736px, 100vw" "(max-width: 640px) 100vw, 640px" -}}
+<figure{{ with $class }} class="{{ . }}"{{ end }}>
+  {{ partial "responsive-img.html" (dict "page" .Page "src" (.Get "src") "alt" $alt "maxwidth" $maxw "sizes" $sizes) }}
+  {{- with $caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>

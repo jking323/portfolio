@@ -12,6 +12,10 @@ title = "Jeremy King"
   email = "jeremy@jeremyking.co"
   github = "jking323"
 
+[imaging]
+  quality = 82
+  resampleFilter = "Lanczos"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]

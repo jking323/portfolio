@@ -225,6 +225,64 @@ li a:hover {
 .prose img {
   max-width: 100%;
   margin: 1.5em 0;
+  border-radius: 3px;
+}
+
+/* --- Figures & captions --- */
+figure {
+  margin: 1.8em 0;
+}
+
+figure img {
+  display: block;
+  width: 100%;
+  margin: 0;
+  border-radius: 3px;
+}
+
+figcaption {
+  font-size: 0.8em;
+  color: #a89880;
+  font-style: italic;
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+/* A wide lead photo that breaks past the prose column on larger screens */
+.lead-photo {
+  margin: 0 0 2.5em;
+}
+
+@media (min-width: 720px) {
+  .lead-photo {
+    width: calc(100% + 6em);
+    margin-left: -3em;
+    margin-right: -3em;
+  }
+}
+
+/* --- Photo galleries --- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8em;
+  margin: 1.8em 0;
+}
+
+.gallery figure {
+  margin: 0;
+}
+
+.gallery img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr; }
+  .lead-photo { width: 100%; margin-left: 0; margin-right: 0; }
 }
 
 .prose hr {

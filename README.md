@@ -1,6 +1,6 @@
 # jeremyking.co
 
-A small web site. No JavaScript. No tracking. No ads.
+A small web site. No JavaScript. No tracking. No ads. Now with pictures.
 
 ## Local Development
 
@@ -9,6 +9,10 @@ hugo server -D
 ```
 
 Opens at `http://localhost:1313`. The `-D` flag includes draft posts.
+
+> **Use the Hugo _extended_ edition.** Photos are optimized to WebP at build
+> time, which the standard build can't do. Cloudflare Pages builds with
+> extended Hugo by default; locally, grab the `hugo_extended_*` release.
 
 ## Creating Content
 
@@ -64,6 +68,10 @@ content/
 │   ├── tube-amp.md
 │   ├── dap.md
 │   └── sovereign-stack.md
+├── dirt-rod/           ← Jeep rat-rod build log (sorted by date)
+│   ├── _index.md
+│   └── the-build-begins/    ← page bundle (markdown + its photos)
+│       └── index.md
 ├── writing/            ← blog posts (sorted by date)
 │   └── leaving-the-cloud.md
 ├── workshop/           ← tools and references (sorted by weight)
@@ -76,4 +84,45 @@ content/
 
 ## Design
 
-Georgia serif on cream (#faf8f5). Burnt orange links (#b85a1a) that darken to sienna (#a0522d) when visited. Small-caps section headers. Dotted underlines. 640px max-width. Inline CSS under 3KB. Zero JavaScript.
+Georgia serif on cream (#faf8f5). Burnt orange links (#b85a1a) that darken to sienna (#a0522d) when visited. Small-caps section headers. Dotted underlines. 640px max-width. Inline CSS, kept lean but no longer chasing a hard byte budget. Zero JavaScript.
+
+## Pictures
+
+Photos live **inside the page** that uses them (a Hugo *page bundle*): make the
+post a folder with `index.md` and drop the image files right next to it. Drop in
+a full-resolution photo straight off the camera — Hugo resizes it, caps the
+width, compresses it, and emits **WebP** at build time. You never hand-optimize.
+
+```
+content/dirt-rod/the-build-begins/
+├── index.md
+├── donor-jeep.jpg          ← drop full-size photos here
+├── teardown-01.jpg
+└── teardown-02.jpg
+```
+
+Reference them by bare filename:
+
+- **Single captioned image** — the `figure` shortcode. Add `class="lead-photo"`
+  to let it bleed past the text column on wide screens:
+  ```
+  {{</* figure src="donor-jeep.jpg" caption="Bare frame after teardown" */>}}
+  {{</* figure src="hero.jpg" alt="..." class="lead-photo" */>}}
+  ```
+- **A grid of photos** — the `gallery` shortcode (each arg is `src` or `src|caption`):
+  ```
+  {{</* gallery
+    "teardown-01.jpg|Body coming off"
+    "teardown-02.jpg|Bare frame"
+  */>}}
+  ```
+
+Each photo is emitted as WebP with a `srcset` (a smaller variant for phones),
+explicit `width`/`height` to prevent layout shift, lazy loading, rounded
+corners, and a responsive 2-up gallery grid (1-up on phones). Quality and
+resample filter live under `[imaging]` in `hugo.toml`. Cloudflare Pages' edge
+network serves the processed output.
+
+The first dirt-rod entry already references these filenames — drop them into
+`content/dirt-rod/the-build-begins/` and they render automatically:
+`donor-jeep.jpg`, `teardown-01.jpg`, `teardown-02.jpg`, `teardown-03.jpg`, `teardown-04.jpg`.

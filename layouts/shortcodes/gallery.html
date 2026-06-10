@@ -1,0 +1,26 @@
+{{- /*
+  gallery — a responsive grid of build-time-optimized photos.
+
+  Usage:
+    {{< gallery
+      "teardown-01.jpg|Body coming off the frame"
+      "teardown-02.jpg|Bare frame, surface rust only"
+      "wheels.jpg"
+    >}}
+
+  Each argument is "src" or "src|caption". src resolves against the page
+  bundle first, then assets/. Drop the photos next to the page's index.md.
+*/ -}}
+{{- $page := .Page -}}
+<div class="gallery">
+  {{- range .Params -}}
+    {{- $parts := split . "|" -}}
+    {{- $src := index $parts 0 | strings.TrimSpace -}}
+    {{- $cap := "" -}}
+    {{- if gt (len $parts) 1 -}}{{- $cap = index $parts 1 | strings.TrimSpace -}}{{- end -}}
+  <figure>
+    {{ partial "responsive-img.html" (dict "page" $page "src" $src "alt" $cap "maxwidth" 700 "sizes" "(max-width: 600px) 100vw, 320px") }}
+    {{- with $cap }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+  {{- end -}}
+</div>
