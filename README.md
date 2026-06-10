@@ -1,6 +1,6 @@
 # jeremyking.co
 
-A small web site. No JavaScript. No tracking. No ads.
+A small web site. No JavaScript. No tracking. No ads. Now with pictures.
 
 ## Local Development
 
@@ -64,6 +64,9 @@ content/
 │   ├── tube-amp.md
 │   ├── dap.md
 │   └── sovereign-stack.md
+├── dirt-rod/           ← Jeep rat-rod build log (sorted by date)
+│   ├── _index.md
+│   └── the-build-begins.md
 ├── writing/            ← blog posts (sorted by date)
 │   └── leaving-the-cloud.md
 ├── workshop/           ← tools and references (sorted by weight)
@@ -76,4 +79,23 @@ content/
 
 ## Design
 
-Georgia serif on cream (#faf8f5). Burnt orange links (#b85a1a) that darken to sienna (#a0522d) when visited. Small-caps section headers. Dotted underlines. 640px max-width. Inline CSS under 3KB. Zero JavaScript.
+Georgia serif on cream (#faf8f5). Burnt orange links (#b85a1a) that darken to sienna (#a0522d) when visited. Small-caps section headers. Dotted underlines. 640px max-width. Inline CSS, kept lean but no longer chasing a hard byte budget. Zero JavaScript.
+
+## Pictures
+
+Photos live in `static/img/<section>/` and are referenced from content by their public path, e.g. `/img/dirt-rod/frame.jpg`.
+
+- **Single captioned image** — Hugo's built-in figure shortcode:
+  ```
+  {{</* figure src="/img/dirt-rod/frame.jpg" caption="Bare frame after teardown" */>}}
+  ```
+- **A grid of photos** — the `gallery` shortcode (each arg is `src` or `src|caption`):
+  ```
+  {{</* gallery
+    "/img/dirt-rod/teardown-01.jpg|Body coming off"
+    "/img/dirt-rod/teardown-02.jpg|Bare frame"
+  */>}}
+  ```
+
+Images get rounded corners, lazy loading, and a responsive 2-up gallery grid (1-up on phones). The dirt-rod entry references the following files — drop them into `static/img/dirt-rod/` and they'll render:
+`donor-jeep.jpg`, `teardown-01.jpg`, `teardown-02.jpg`, `teardown-03.jpg`, `teardown-04.jpg`.

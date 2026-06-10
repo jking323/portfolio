@@ -14,6 +14,17 @@
   {{ end }}
 </ul>
 
+<h2>dirt rod</h2>
+<ul>
+  {{ range (where .Site.RegularPages "Section" "dirt-rod").ByDate.Reverse }}
+  <li class="entry">
+    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ with .Params.status }}<span class="tag">{{ . }}</span>{{ end }}
+    {{ if not .Date.IsZero }}<time>{{ .Date.Format "Jan 2006" }}</time>{{ end }}
+  </li>
+  {{ end }}
+</ul>
+
 <h2>writing</h2>
 <ul>
   {{ range (where .Site.RegularPages "Section" "writing").ByDate.Reverse }}

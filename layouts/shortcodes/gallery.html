@@ -1,0 +1,25 @@
+{{- /*
+  Photo gallery shortcode.
+
+  Usage:
+    {{< gallery
+      "/img/dirt-rod/frame.jpg|Bare frame after the teardown"
+      "/img/dirt-rod/engine.jpg|The 4.0 inline-six, cleaned up"
+      "/img/dirt-rod/wheels.jpg"
+    >}}
+
+  Each argument is "src" or "src|caption". Drop the image files in
+  static/img/dirt-rod/ and they'll show up here.
+*/ -}}
+<div class="gallery">
+  {{- range .Params -}}
+    {{- $parts := split . "|" -}}
+    {{- $src := index $parts 0 | strings.TrimSpace -}}
+    {{- $cap := "" -}}
+    {{- if gt (len $parts) 1 -}}{{- $cap = index $parts 1 | strings.TrimSpace -}}{{- end -}}
+  <figure>
+    <img src="{{ $src }}" alt="{{ $cap }}" loading="lazy">
+    {{- with $cap }}<figcaption>{{ . }}</figcaption>{{ end -}}
+  </figure>
+  {{- end -}}
+</div>
