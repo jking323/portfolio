@@ -10,6 +10,10 @@ hugo server -D
 
 Opens at `http://localhost:1313`. The `-D` flag includes draft posts.
 
+> **Use the Hugo _extended_ edition.** Photos are optimized to WebP at build
+> time, which the standard build can't do. Cloudflare Pages builds with
+> extended Hugo by default; locally, grab the `hugo_extended_*` release.
+
 ## Creating Content
 
 ```bash
@@ -66,7 +70,8 @@ content/
 │   └── sovereign-stack.md
 ├── dirt-rod/           ← Jeep rat-rod build log (sorted by date)
 │   ├── _index.md
-│   └── the-build-begins.md
+│   └── the-build-begins/    ← page bundle (markdown + its photos)
+│       └── index.md
 ├── writing/            ← blog posts (sorted by date)
 │   └── leaving-the-cloud.md
 ├── workshop/           ← tools and references (sorted by weight)
@@ -83,19 +88,41 @@ Georgia serif on cream (#faf8f5). Burnt orange links (#b85a1a) that darken to si
 
 ## Pictures
 
-Photos live in `static/img/<section>/` and are referenced from content by their public path, e.g. `/img/dirt-rod/frame.jpg`.
+Photos live **inside the page** that uses them (a Hugo *page bundle*): make the
+post a folder with `index.md` and drop the image files right next to it. Drop in
+a full-resolution photo straight off the camera — Hugo resizes it, caps the
+width, compresses it, and emits **WebP** at build time. You never hand-optimize.
 
-- **Single captioned image** — Hugo's built-in figure shortcode:
+```
+content/dirt-rod/the-build-begins/
+├── index.md
+├── donor-jeep.jpg          ← drop full-size photos here
+├── teardown-01.jpg
+└── teardown-02.jpg
+```
+
+Reference them by bare filename:
+
+- **Single captioned image** — the `figure` shortcode. Add `class="lead-photo"`
+  to let it bleed past the text column on wide screens:
   ```
-  {{</* figure src="/img/dirt-rod/frame.jpg" caption="Bare frame after teardown" */>}}
+  {{</* figure src="donor-jeep.jpg" caption="Bare frame after teardown" */>}}
+  {{</* figure src="hero.jpg" alt="..." class="lead-photo" */>}}
   ```
 - **A grid of photos** — the `gallery` shortcode (each arg is `src` or `src|caption`):
   ```
   {{</* gallery
-    "/img/dirt-rod/teardown-01.jpg|Body coming off"
-    "/img/dirt-rod/teardown-02.jpg|Bare frame"
+    "teardown-01.jpg|Body coming off"
+    "teardown-02.jpg|Bare frame"
   */>}}
   ```
 
-Images get rounded corners, lazy loading, and a responsive 2-up gallery grid (1-up on phones). The dirt-rod entry references the following files — drop them into `static/img/dirt-rod/` and they'll render:
+Each photo is emitted as WebP with a `srcset` (a smaller variant for phones),
+explicit `width`/`height` to prevent layout shift, lazy loading, rounded
+corners, and a responsive 2-up gallery grid (1-up on phones). Quality and
+resample filter live under `[imaging]` in `hugo.toml`. Cloudflare Pages' edge
+network serves the processed output.
+
+The first dirt-rod entry already references these filenames — drop them into
+`content/dirt-rod/the-build-begins/` and they render automatically:
 `donor-jeep.jpg`, `teardown-01.jpg`, `teardown-02.jpg`, `teardown-03.jpg`, `teardown-04.jpg`.

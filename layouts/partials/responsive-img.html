@@ -1,0 +1,25 @@
+{{- /*
+  responsive-img — resize a page-bundle (or assets/) image to WebP and emit a
+  responsive <img> with srcset. Falls back to the literal src for anything that
+  isn't a processable local resource (external URLs, missing files), so the
+  build never fails on a not-yet-added photo.
+
+  Params: page, src, alt, maxwidth (px cap), sizes
+*/ -}}
+{{- $page := .page -}}
+{{- $src := .src -}}
+{{- $alt := .alt | default "" -}}
+{{- $maxw := .maxwidth | default 1280 -}}
+{{- $sizes := .sizes | default "100vw" -}}
+{{- $res := false -}}
+{{- with $page -}}{{- $res = .Resources.GetMatch $src -}}{{- end -}}
+{{- if not $res -}}{{- $res = resources.Get $src -}}{{- end -}}
+{{- if $res -}}
+  {{- $target := int (math.Min $res.Width $maxw) -}}
+  {{- $halfw := int (math.Max 320 (div $target 2)) -}}
+  {{- $full := $res.Resize (printf "%dx webp q82" $target) -}}
+  {{- $small := $res.Resize (printf "%dx webp q82" (int (math.Min $halfw $target))) -}}
+  <img src="{{ $full.RelPermalink }}" srcset="{{ $small.RelPermalink }} {{ $small.Width }}w, {{ $full.RelPermalink }} {{ $full.Width }}w" sizes="{{ $sizes }}" width="{{ $full.Width }}" height="{{ $full.Height }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- else -}}
+  <img src="{{ $src }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+{{- end -}}

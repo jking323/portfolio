@@ -10,7 +10,7 @@ honest rust, the kind of bones worth building on. The goal is a dirt rod: a
 rat-rod stance and attitude on a chassis that can actually take a beating off
 pavement.
 
-{{< figure src="/img/dirt-rod/donor-jeep.jpg" caption="The donor, the day it rolled into the shop." >}}
+{{< figure src="donor-jeep.jpg" caption="The donor, the day it rolled into the shop." class="lead-photo" >}}
 
 ## The plan
 
@@ -26,10 +26,10 @@ labeled and bagged. The frame is in better shape than expected — surface rust,
 nothing structural.
 
 {{< gallery
-  "/img/dirt-rod/teardown-01.jpg|Body coming off the frame"
-  "/img/dirt-rod/teardown-02.jpg|Bare frame, surface rust only"
-  "/img/dirt-rod/teardown-03.jpg|The inline-six, still in place"
-  "/img/dirt-rod/teardown-04.jpg|Parts labeled and bagged"
+  "teardown-01.jpg|Body coming off the frame"
+  "teardown-02.jpg|Bare frame, surface rust only"
+  "teardown-03.jpg|The inline-six, still in place"
+  "teardown-04.jpg|Parts labeled and bagged"
 >}}
 
 More to come as the build moves forward. Next up: cleaning the frame and
